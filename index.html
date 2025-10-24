@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaiGosh! Siomai!</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="MaiGosh.png">
+
+</head>
+<body>
+
+  <nav>
+    <div class="logo">MaiGosh! <span>Siomai!</span></div>
+
+    <div class="menu-toggle" id="menu-toggle">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <ul id="nav-menu">
+      <li><a href="#home" class="nav-link active">Home</a></li>
+      <li><a href="#menu" class="nav-link">Menu</a></li>
+      <li><a href="#choose" class="nav-link">Why Choose Us?</a></li>
+      <li><a href="#contact" class="nav-link">Contacts</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="hero section visible animate-pop">
+    <div class="hero-content">
+      <h1>Welcome to <span>MaiGosh! Siomai!</span></h1>
+      <p>Sarap, Sulit, at Lutong Pinoy! Taste the Goodness of freshly Steamed Siomai, Sweet Gulaman, and Classic Rice Meals!</p>
+      <button class="cta-btn"><a href="#menu" class="nav-link">Order Now</a></button>
+    </div>
+    <img src="MaiGosh.png" alt="MaiGosh! Siomai! Logo" class="brand-logo">
+  </section>
+
+  <section id="menu" class="section">
+    <div class="menu-logo">
+      <img src="MaiGosh2.png" alt="MaiGosh! Siomai! Logo">
+    </div>
+
+    <h2 class="section-title">Best Sellers</h2>
+
+    <div class="menu-container">
+     
+      <div class="menu-card">
+        <img src="siomai.jpg" alt="Pork Siomai" />
+        <h3>Pork Siomai</h3>
+        <p class="price">₱30 / 5pcs</p>
+        <p>Juicy, flavorful, and steamed to perfection — our #1 bestseller for every Pinoy craving!</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="chicken-siomai.jpg" alt="Chicken Siomai" />
+        <h3>Chicken Siomai</h3>
+        <p class="price">₱35 / 5pcs</p>
+        <p>Light, tender, and flavorful! Our chicken siomai is a guilt-free choice for healthy eaters.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="japanese-siomai.jpg" alt="Japanese Siomai" />
+        <h3>Japanese Siomai</h3>
+        <p class="price">₱40 / 5pcs</p>
+        <p>Enjoy a touch of Japanese flair — rich, savory, and perfectly seasoned with crab and nori.</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="siomai-rice.jpg" alt="Siomai with Rice" />
+        <h3>Siomai with Rice</h3>
+        <p class="price">₱45 / Meal</p>
+        <p>A full meal combo — 4 pcs siomai, rice, and our famous chili-soy sauce. Sulit sa bawat subo!</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="gulaman.jpg" alt="Gulaman Drink" />
+        <h3>Gulaman Drink</h3>
+        <p class="price">₱15 / Cup</p>
+        <p>Sweet and refreshing gulaman — perfect for cooling down after your siomai feast!</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="choose" class="section">
+    <h2 class="section-title">💡 Why Choose MaiGosh! Siomai?</h2>
+    <div class="choose-container">
+      <div class="choose-box"><p>🍢 Made fresh daily with authentic Pinoy flavor.</p></div>
+      <div class="choose-box"><p>🌿 Affordable meals with high quality ingredients.</p></div>
+      <div class="choose-box"><p>🥤 Refreshing gulaman that completes your merienda!</p></div>
+      <div class="choose-box"><p>❤️ Friendly service that feels like home.</p></div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2 class="section-title">📞 Contact Us</h2>
+    <div class="contact-info">
+      <p>📍 P1, B1, Lot-19A, Pascualer Ville, Quezon City</p>
+      <p>📞 +63 9620 800 748</p>
+      <p>✉️ <a href="mailto:maigosh.siomai@gmail.com">maigosh.siomai@gmail.com</a></p>
+    </div>
+  </section>
+
+  <footer id="site-footer">
+    <p>&copy; 2025 MaiGosh! Siomai!. Sulit, Sarap, at Lutong Pinoy.</p>
+  </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+    const footer = document.getElementById('site-footer');
+    const toggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    toggle.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+      toggle.classList.toggle('open');
+    });
+
+    function updateFooterVisibility(activeSection) {
+      footer.style.display = activeSection.id === 'contact' ? 'flex' : 'none';
+    }
+
+    const initiallyVisible = document.querySelector('.section.visible') || document.getElementById('home');
+    updateFooterVisibility(initiallyVisible);
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+
+        sections.forEach(s => s.classList.remove('visible', 'animate-pop'));
+        target.classList.add('visible');
+
+        setTimeout(() => target.classList.add('animate-pop'), 50);
+
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+
+        updateFooterVisibility(target);
+        navMenu.classList.remove('open');
+        toggle.classList.remove('open');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
